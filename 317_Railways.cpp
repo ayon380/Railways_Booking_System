@@ -446,6 +446,12 @@ int main()
                      << endl;
             ;
         }
+        else if(choice == 2)
+        {
+            ofstream fout("ticket.txt");
+            fout.clear();
+            cout<<"Ticket Cancelled Successfully !!!!"<<endl<<endl;
+        }
         else if (choice == 3)
         {
 
