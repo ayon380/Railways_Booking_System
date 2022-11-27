@@ -1,34 +1,52 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <iomanip>
+#include <vector>
+#include <cmath>
+#include <windows.h>
+void animate()
+{
+    char chars[] = {'-', '\\', '|', '/'};
+    unsigned int i;
+    for (i = 0; i < 15; ++i)
+    {
+        printf("%c\r", chars[i % sizeof(chars)]);
+
+        fflush(stdout);
+        Sleep(100);
+    }
+}
 class trainName
 {
 public:
     int no;
-    string name;
+    std::string name;
     float ttime;
-    string days;
+    std::string days;
     int dtime, arrtime, stops;
     int sl, a3, a2, a1;
-    trainName() {}
+    int slp, a3p, a2p, a1p;
+    // trainName() {}
 };
 class passenger
 {
 public:
     char sex;
-    string name;
-    string bdate;
+    std::string name;
+    std::string bdate;
 };
-int isGoing(string s, string from, string to)
+int isGoing(std::string s, std::string from, std::string to)
 {
     int q = 1;
     int pos = s.find("::");
-    string str = s.substr(pos + 2);
+    std::string str = s.substr(pos + 2);
     int len = str.length();
     int e = 0;
     while (len != 0)
     {
         pos = str.find(",");
-        string a = str.substr(0, pos);
+        std::string a = str.substr(0, pos);
         if (a == from)
         {
             e = 1;
@@ -43,19 +61,19 @@ int isGoing(string s, string from, string to)
         str = str.substr(pos + 1);
         len = str.length();
     }
-    return false;
+    return 0;
 }
-int nostaions(string s, string to)
+int nostaions(std::string s, std::string to)
 {
     int q = 0;
     int pos = s.find("::");
-    string str = s.substr(pos + 2);
+    std::string str = s.substr(pos + 2);
     int len = str.length();
     int e = 0;
     while (len != 0)
     {
         pos = str.find(",");
-        string a = str.substr(0, pos);
+        std::string a = str.substr(0, pos);
         if (a == to)
         {
             return q;
@@ -89,37 +107,154 @@ int random(int range)
     srand((unsigned)time(NULL));
     return (rand() % range) + 1;
 }
-int main()
+void board1()
 {
-    int n = 8;
-    // Train List
-    // fout<<"fuck youu"<<endl;
-    int a;
+    std::cout << std::endl;
+    std::cout << "*********************** Welcome to INDIAN RAILWAYS **********************" << std::endl
+              << std::endl;
+    std::cout << "                            Train Route Map" << std::endl
+              << std::endl;
+    std::cout << "                                                       <-> GDR <-> MAS" << std::endl;
+    std::cout << "                                                     /" << std::endl;
+    std::cout << "HWH <-> KGP <-> BBS <-> KUR <-> VZN <-> VSKP <-> BZA " << std::endl;
+    std::cout << "    \\                                                 \\" << std::endl;
+    std::cout << "     <-> ASN <-> DHN <-> PNME <-> GAYA <-> DDU         <-> RU <-> KPD -> SMVT" << std::endl;
+    std::cout << "                                              \\     " << std::endl;
+    std::cout << "                                               <-> PRYJ <-> CNB <-> NDLS     " << std::endl
+              << std::endl
+              << std::endl;
+    // Main Menu
+    std::cout << "************************ IRCTC Ticket RESERVATION ************************ " << std::endl
+              << std::endl;
+}
+bool digit_check(std::string n, int d)
+{
+    int i;
+    int r = 0;
+    int q = n.length();
+    for (i = 0; i < q; i++)
+    {
+        if ((n[i] >= '0' && n[i] <= '9') and q == d)
+        {
+            r = 1;
+        }
+        else
+        {
+            r = 0;
+        }
+    }
+    if (r == 1)
+    {
+        return true;
+    }
+    return false;
+}
+void payment(int price)
+{
+    system("cls");
+    std::cout << "************************** Payment Gateway ******************************" << std::endl
+              << std::endl;
+    std::cout << "Total Amount to be paid: " << price << std::endl;
+    std::cout << "Please enter your card details" << std::endl;
     while (1)
     {
-        cout << "***************  Welcome TO IRCTC  **************" << endl<<endl;
-        cout << "Enter 1 to login :";
-        cin >> a;
-        if (a == 1)
+        std::cout << "Card Number: ";
+        std::string card;
+        std::cin >> card;
+        if (!digit_check(card, 16))
         {
-            string user, pass;
-            ifstream fin("password.txt");
+            std::cout << "Invalid Card Number" << std::endl;
+            continue;
+        }
+        std::cout << "Expiry Date: MMYY  : ";
+        std::string exp;
+        std::cin >> exp;
+        if (!digit_check(exp, 4))
+        {
+            std::cout << "Invalid Card Number" << std::endl;
+            continue;
+        }
+        std::cout << "CVV: ";
+        std::string cvv;
+        std::cin >> cvv;
+        if (!digit_check(cvv, 3))
+        {
+            std::cout << "Invalid Card Number" << std::endl;
+
+            continue;
+        }
+        break;
+    }
+    system("cls");
+    std::cout << "Please wait, we are Proccessing your request to the Concerned bank" << std::endl;
+    animate();
+    animate();
+    system("cls");
+    std::cout << "         RAZOR PAY\n"
+              << std::endl;
+    while (1)
+    {
+        std::cout << "Enter your 6-digit OTP: ";
+        std::string otp;
+        std::cin >> otp;
+        if (!digit_check(otp, 6))
+        {
+            std::cout << "Invalid OTP" << std::endl;
+            continue;
+        }
+        break;
+    }
+    system("cls");
+    std::cout << "Please wait, we are Proccessing your request ..." << std::endl;
+    animate();
+    animate();
+    system("cls");
+    std::cout << "Payment Successful" << std::endl;
+    Sleep(1000);
+}
+int main()
+{
+    const int n = 8;
+    // system("color 0");
+    std::string a;
+    while (1)
+    {
+        std::cout << "***************  Welcome TO IRCTC  **************" << std::endl;
+        std::cout << "\n\nEnter 1 to login :";
+        std::cin >> a;
+        if (a == "1")
+        {
+            std::string user, pass;
+            std::ifstream fin("password.txt");
             fin >> user >> pass;
             fin.close();
-            string user1, pass1;
-            cout << "Enter your username : ";
-            cin >> user1;
-            cout << "Enter your password : ";
-            cin >> pass1;
+            std::string user1, pass1;
+            std::cout << "Enter your username : ";
+            std::cin >> user1;
+            std::cout << "Enter your password : ";
+            std::cin >> pass1;
             if (user1 == user and pass == pass1)
             {
-                cout << "Login Suuccessful";
+                std::cout << "Login Suuccessful";
                 break;
             }
             else
             {
-                cout << "Error";
+                system("CLS");
+                std::cout << "***************  Welcome TO IRCTC  **************" << std::endl;
+                std::cout << "\nError, Incorrect Username or Password\n\n";
+                animate();
+                system("CLS");
             }
+        }
+        else
+        {
+            system("CLS");
+            std::cout << "***************  Welcome TO IRCTC  **************" << std::endl;
+            std::cout << "\nInvalid Input , Try Again  \n"
+                      << std::endl;
+            animate();
+            system("CLS");
         }
     }
 
@@ -131,10 +266,14 @@ int main()
     train[0].dtime = 710;
     train[0].arrtime = 950;
     train[0].stops = 5;
-    train[0].sl = 5;
+    train[0].sl = 13;
     train[0].a1 = 9;
     train[0].a2 = 6;
-    train[0].a3 = 3;
+    train[0].a3 = 9;
+    train[0].slp = 200;
+    train[0].a1p = 400;
+    train[0].a2p = 600;
+    train[0].a3p = 900;
 
     train[1].no = 12246;
     train[1].name = "SMVT-HWH DURONTO EXP ::SMVT,RU,BZA,VZN,BBS,HWH,";
@@ -203,7 +342,7 @@ int main()
     train[6].dtime = 1010;
     train[6].stops = 8;
     train[6].arrtime = 605;
-    train[6].sl = 2;
+    train[6].sl = 0;
     train[6].a1 = 8;
     train[6].a2 = 5;
     train[6].a3 = 6;
@@ -215,76 +354,80 @@ int main()
     train[7].dtime = 1010;
     train[7].stops = 8;
     train[7].arrtime = 555;
-    train[7].sl = 2;
+    train[7].sl = 0;
     train[7].a1 = 8;
     train[7].a2 = 5;
     train[7].a3 = 6;
     // train[6].o
     system("CLS");
-    cout << endl;
-    cout << "*********************** Welcome to INDIAN RAILWAYS **********************" << endl
-         << endl;
-    cout << "                            Train Route Map" << endl
-         << endl;
-    cout << "                                                       <-> GDR <-> MAS" << endl;
-    cout << "                                                     /" << endl;
-    cout << "HWH <-> KGP <-> BBS <-> KUR <-> VZN <-> VSKP <-> BZA " << endl;
-    cout << "    \\                                                 \\" << endl;
-    cout << "     <-> ASN <-> DHN <-> PNME <-> GAYA <-> DDU         <-> RU <-> KPD -> SMVT" << endl;
-    cout << "                                              \\     " << endl;
-    cout << "                                               <-> PRYJ <-> CNB <-> NDLS     " << endl
-         << endl
-         << endl;
-    // Main Menu
-    cout << "************************ IRCTC Ticket RESERVATION ************************ " << endl
-         << endl;
-    string from, to;
+    board1();
+    std::string from, to;
     while (1)
     {
-        cout << "1. Book a Ticket" << endl;
-        cout << "2. Cancel Ticket" << endl;
-        cout << "3. Change Password" << endl;
-        cout << "4. Log Out" << endl;
+        std::cout << "1. Book a Ticket" << std::endl;
+        std::cout << "2. Cancel Ticket" << std::endl;
+        std::cout << "3. Change Password" << std::endl;
+        std::cout << "4. Log Out" << std::endl;
+        std::string ch;
         int choice;
-        cout << "Enter your Choice : ";
-        cin >> choice;
-        cout << endl
-             << endl;
+        try
+        {
+            std::cout << "Enter your Choice : ";
+            std::cin >> ch;
+            choice = stoi(ch);
+        }
+        catch (...)
+        {
+            system("CLS");
+            board1();
+            continue;
+        }
+        // if(choice > 4  )
+        // {
+        //     system("CLS");
+        //     board1();
+        //     continue;
+        // }
+        std::cout << std::endl
+                  << std::endl;
         if (choice == 1)
         {
-            cout << "Enter Originating Station  :  ";
-            cin >> from;
-            cout << "Enter Arriving Station :  ";
-            cin >> to;
-            int dd, mm, yy;
-            cout << "Enter the Date of Travel in the form of DD MM YYYY : ";
-            cin >> dd >> mm >> yy;
+            std::cout << "Enter Originating Station  :  ";
+            std::cin >> from;
+            std::cout << "\nEnter Arriving Station :  ";
+            std::cin >> to;
+            int dd, mm, yy, st;
+            std::cout << "\nEnter the Date of Travel in the form of DD MM YYYY : ";
+            std::cin >> dd >> mm >> yy;
             for (auto &c : from)
                 c = toupper(c);
             for (auto &c : to)
                 c = toupper(c);
-            cout << endl
-                 << "Train No.    Train Name       Departure Time          Arrival Time      SL\t\t3A\t\t2A\t\t1A" << endl
-                 << endl;
+            std::cout << std::endl
+                      << "Train No.    Train Name       Departure Time          Arrival Time     \t\t SL\t\t3A\t\t2A\t\t1A" << std::endl
+                      << std::endl;
             bool trainfound = false;
             int dept, arrt;
-            string day;
+            int count = 0;
+            std::string day;
             for (int i = 0; i < n; i++)
             {
                 int r = isGoing(train[i].name, from, to);
                 if (r > 0 && isRunning(train[i], dd, mm, yy))
                 {
-                    string str = train[i].name;
+                    count++;
+                    std::string str = train[i].name;
                     int pos = str.find("::");
                     str = str.substr(0, pos);
                     trainfound = true;
-                    string next = " ";
+                    std::string next = " ";
                     int timeperstation = ceil(train[i].ttime / train[i].stops); // in minutes
                     int no = nostaions(train[i].name, from);
+                    st = r;
                     int dep = no * timeperstation;
                     dep += train[i].dtime;
                     int arr = r * timeperstation + dep;
-                    cout << endl;
+                    std::cout << std::endl;
                     if (dep >= 1440)
                     {
                         dep %= 1440;
@@ -302,174 +445,277 @@ int main()
                         next = "Next Day";
                     }
                     day = next;
-                    cout.width(8);
-                    cout << left << train[i].no;
-                    cout.width(25);
-                    cout << left << str << " ";
-                    cout << setw(2) << right << setfill('0') << (dep / 60) << ":";
-                    cout << setw(2) << right<< setfill('0') << (dep % 60) << "             ";
-                    cout << setw(2) << right<< setfill('0') << (arr / 60) << ":";
-                    cout << setw(2) << right<< setfill('0') << arr % 60 << " ";
-                    cout.width(10);
-                    cout << setfill(' ') << next << "  " << train[i].sl << "\t\t" << train[i].a3 << "\t\t" << train[i].a2 << "\t\t" << train[i].a1 << endl;
+                    std::cout.width(8);
+                    std::cout << std::left << train[i].no;
+                    std::cout.width(25);
+                    std::cout << std::left << str << " ";
+                    std::cout << std::setw(2) << std::right << std::setfill('0') << (dep / 60) << ":";
+                    std::cout << std::setw(2) << std::left << std::setfill('0') << (dep % 60) << "             ";
+                    std::cout << std::setw(2) << std::right << std::setfill('0') << (arr / 60) << ":";
+                    std::cout << std::setw(2) << std::right << std::setfill('0') << arr % 60 << " ";
+                    std::cout.width(10);
+                    std::cout << std::setfill(' ') << next << "\t\t  " << train[i].sl << "\t\t" << train[i].a3 << "\t\t" << train[i].a2 << "\t\t" << train[i].a1 << std::endl;
                 }
                 else
                 {
                     continue;
                 }
             }
-            cout << endl;
-            cout << "Enter the Train No you want to book : ";
+            if (count == 0)
+            {
+                system("CLS");
+
+                std::cout << "No Trains Found" << std::endl;
+                Sleep(1000);
+                system("CLS");
+                board1();
+
+                continue;
+            }
+            std::cout << std::endl;
+            std::cout << "Enter the Train No you want to book : ";
             int trno, pno;
-            cin >> trno;
-            cout << "Enter the class you want to book (1A for First CLass , 2A for 2Tier AC , 3A for 3 Tier AC , 4 for Sleeper Class : ";
-            string sc;
-            cin >> sc;
-            cout << "Enter the no of passengers : ";
-            cin >> pno;
-            passenger p[pno];
+            std::cin >> trno;
+            for (int i = 0; i < n; i++)
+            {
+                int r = isGoing(train[i].name, from, to);
+                if (r > 0 && train[i].no==trno)
+                {
+                    count++;
+                    std::string str = train[i].name;
+                    int pos = str.find("::");
+                    str = str.substr(0, pos);
+                    trainfound = true;
+                    std::string next = " ";
+                    int timeperstation = ceil(train[i].ttime / train[i].stops); // in minutes
+                    int no = nostaions(train[i].name, from);
+                    st = r;
+                    int dep = no * timeperstation;
+                    dep += train[i].dtime;
+                    int arr = r * timeperstation + dep;
+                    std::cout << std::endl;
+                    if (dep >= 1440)
+                    {
+                        dep %= 1440;
+                    }
+
+                    if (arr >= 1440)
+                    {
+                        arr %= 1440;
+                        next = "Next Day";
+                    }
+                    dept = dep;
+                    arrt = arr;
+                    if (dep % 60 > arr % 60)
+                    {
+                        next = "Next Day";
+                    }
+                    day = next;
+                }
+            }
+            std::string sc;
+            while (1)
+            {
+                std::cout << "\nEnter the class you want to book (1A for First CLass , 2A for 2Tier AC , 3A for 3 Tier AC , 4 for Sleeper Class : ";
+                std::cin >> sc;
+                if (sc == "1A" || sc == "2A" || sc == "3A" || sc == "SL")
+                {
+                    break;
+                }
+                else
+                {
+                    std::cout << "Invalid Class" << std::endl;
+                }
+            }
+
+            std::cout << "\nEnter the no of passengers : ";
+            std::cin >> pno;
+            std::vector<passenger> p;
             for (int i = 0; i < pno; i++)
             {
-                cout << "Enter Passenger Name : ";
-                getline(cin >> ws, p[i].name);
-                cout << "Enter Sex : ";
-                cin >> p[i].sex;
-                cout << "Enter Birth Date : ";
-                getline(cin >> ws, p[i].bdate);
+                passenger q;
+                std::string s;
+                std::cout << "Enter Passenger Name : ";
+                std::getline(std::cin >> std::ws, s);
+                q.name = s;
+                std::cout << "Enter Sex : ";
+                std::cin >> q.sex;
+                std::cout << "Enter Birth Date  DD/MM/YYYY : ";
+                std::getline(std::cin >> std::ws, s);
+                q.bdate = s;
+                p.push_back(q);
             }
-            cout << "Donee......" << endl
-                 << endl;
-            system("CLS");
-            cout << "            RESERVATION TICKET          " << endl;
-            cout << "                                        " << endl;
+            std::cout << "Donee......" << std::endl
+                      << std::endl;
 
+            system("CLS");
+            std::cout << "\n\n Wait a moment while we are processing your request....\n\n";
+            int price = 0;
+            // std::cout << price << " " << st << std::endl;
             for (int i = 0; i < n; i++)
             {
                 if (train[i].no == trno)
                 {
-                    cout.width(30);
-                    cout << left << "TRAIN No : " << train[i].no << endl;
-                    cout.width(30);
-                    cout << left << "TRAIN NAME : " << train[i].name.substr(0, train[i].name.find("::")) << endl;
-                    cout.width(30);
-                    cout << left << "ORIGINATING STATION : " << from << endl;
-                    cout.width(30);
-                    cout << left << "DESTINATION STATION : " << to << endl;
-                    cout.width(30);
-                    cout << left << "DEPARTURE TIME : " << (dept / 60) << ":" << (dept % 60) << endl;
-                    cout.width(30);
-                    cout << left << "ARRIVAL TIME : " << (arrt / 60) << ":" << arrt % 60 << " " << day << endl;
-                    cout.width(30);
-                    cout << left << "CLASS : " << sc << endl;
-                    cout.width(30);
-                    cout << left << "DATE : " << dd << "/" << mm << "/" << yy << endl;
-                    cout.width(30);
-                    string coach;
-                    int seat;
-                    if (sc == "1A")
-                    {
-                        coach = "H" + to_string(random(2));
-                        seat = random(22);
-                    }
-                    else if (sc == "2A")
-                    {
-                        coach = "A" + to_string(random(3));
-                        seat = random(52);
-                    }
-                    else if (sc == "3A")
-                    {
-                        coach = "B" + to_string(random(10));
-                        seat = random(72);
-                    }
-                    else if (sc == "SL")
-                    {
-                        coach = "S" + to_string(random(5));
-                        seat = random(72);
-                    }
-                    else
-                    {
-                        coach = "GS" + to_string(random(2));
-                        seat = random(106);
-                    }
-                    cout << left << "COACH NO - SEAT : " << coach << "-" << seat << endl;
+                    std::string coach;
+                    int seat, capa;
+
+                    std::vector<int> seats;
                     for (int j = 0; j < pno; j++)
                     {
-                        cout.width(30);
-                        cout << left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  " << p[j].bdate << endl
-                             << endl;
+
+                        if (sc == "1A")
+                        {
+                            price = (train[i].a3p * st);
+                            coach = "H" + std::to_string(random(2));
+                            seat = random(22);
+                            capa = 22;
+                        }
+                        else if (sc == "2A")
+                        {
+                            price = (train[i].a2p * st);
+                            coach = "A" + std::to_string(random(3));
+                            seat = random(52);
+                            capa = 52;
+                        }
+                        else if (sc == "3A")
+                        {
+                            price = (train[i].a1p * st);
+                            coach = "B" + std::to_string(random(10));
+                            seat = random(72);
+                            capa = 72;
+                        }
+                        else if (sc == "SL")
+                        {
+                            price = (train[i].slp * st);
+                            coach = "S" + std::to_string(random(5));
+                            seat = random(80);
+                            capa = 80;
+                        }
+                        // std::cout << price << " " << st << std::endl;
+                        animate();
+                        seats.push_back(seat);
                     }
-                    cout << "Wishing You a Happy and Safe Journey...." << endl;
-                    cout << "Enter 1 to print the ticket , 2 to cancel :";
+                    price *= pno;
+                    payment(price);
+                    system("CLS");
+                    std::cout << "Wait a bit..." << std::endl;
+                    animate();
+                    system("CLS");
+                    std::cout << "            RESERVATION TICKET          " << std::endl;
+                    std::cout << "                                        " << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "TRAIN No : " << train[i].no << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "TRAIN NAME : " << train[i].name.substr(0, train[i].name.find("::")) << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "ORIGINATING STATION : " << from << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "DESTINATION STATION : " << to << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "DEPARTURE TIME : " << (dept / 60) << ":" << (dept % 60) << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "ARRIVAL TIME : " << (arrt / 60) << ":" << arrt % 60 << " " << day << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "CLASS : " << sc << std::endl;
+                    std::cout.width(30);
+                    std::cout << std::left << "DATE : " << dd << "/" << mm << "/" << yy << std::endl;
+                    std::cout.width(30);
+
+                    for (int j = 0; j < pno; j++)
+                    {
+                        std::cout.width(30);
+                        std::cout << std::left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  "
+                                  << "  " << coach << "-" << seats[j] << std::endl;
+                    }
+                    std::cout.width(30);
+                    std::cout << std::left << "TOTAL AMOUNT : "
+                              << "INR " << price << std::endl;
+                    std::cout.width(30);
+                    std::cout << "Wishing You a Happy and Safe Journey....\n"
+                              << std::endl;
+                    std::cout << "Enter 1 to print the ticket , 2 to cancel :";
                     int pp;
-                    cin >> pp;
+                    std::cin >> pp;
                     if (pp == 1)
                     {
-                        ofstream fout("Ticket.txt");
+                        std::ofstream fout("Ticket.txt");
                         fout.width(30);
-                        fout << "            RESERVATION TICKET          " << endl;
-                        fout << "                                        " << endl;
-                        fout << left << "TRAIN No : " << train[i].no << endl;
+                        fout << "            RESERVATION TICKET          " << std::endl;
+                        fout << "                                        " << std::endl;
+                        fout << std::left << "TRAIN No : " << train[i].no << std::endl;
                         fout.width(30);
-                        fout << left << "TRAIN NAME : " << train[i].name.substr(0, train[i].name.find("::")) << endl;
+                        fout << std::left << "TRAIN NAME : " << train[i].name.substr(0, train[i].name.find("::")) << std::endl;
                         fout.width(30);
-                        fout << left << "ORIGINATING STATION : " << from << endl;
+                        fout << std::left << "ORIGINATING STATION : " << from << std::endl;
                         fout.width(30);
-                        fout << left << "DESTINATION STATION : " << to << endl;
+                        fout << std::left << "DESTINATION STATION : " << to << std::endl;
                         fout.width(30);
-                        fout << left << "DEPARTURE TIME : " << (dept / 60) << ":" << (dept % 60) << endl;
+                        fout << std::left << "DEPARTURE TIME : " << (dept / 60) << ":" << (dept % 60) << std::endl;
                         fout.width(30);
-                        fout << left << "ARRIVAL TIME : " << (arrt / 60) << ":" << arrt % 60 << " " << day << endl;
+                        fout << std::left << "ARRIVAL TIME : " << (arrt / 60) << ":" << arrt % 60 << " " << day << std::endl;
                         fout.width(30);
-                        fout << left << "CLASS : " << sc << endl;
+                        fout << std::left << "CLASS : " << sc << std::endl;
                         fout.width(30);
-                        fout << left << "DATE : " << dd << "/" << mm << "/" << yy << endl;
+                        fout << std::left << "DATE : " << dd << "/" << mm << "/" << yy << std::endl;
                         fout.width(30);
-                        fout << left << "COACH NO - SEAT : " << coach << "-" << seat << endl;
+                        fout << std::left << "COACH NO - SEAT : " << coach << "-" << seat << std::endl;
                         for (int j = 0; j < pno; j++)
                         {
                             fout.width(30);
-                            fout << left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  " << p[j].bdate << endl
-                                 << endl;
+                            fout << std::left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  " << p[j].bdate << "  " << coach << "-" << seats[j] << std::endl
+                                 << std::endl;
                         }
-                        fout << "Wishing You a Happy and Safe Journey...." << endl;
+                        fout.width(30);
+                        fout << std::left << "TOTAL AMOUNT : "
+                             << "INR " << price << std::endl;
+                        fout.width(30);
+                        fout << "\nWishing You a Happy and Safe Journey....\n"
+                             << std::endl;
                         fout.close();
+
+                        std::cout << std::endl
+                                  << std::endl
+                                  << "Ticket Printed Succssfully !!!!" << std::endl;
                     }
-                    cout << endl
-                         << endl
-                         << "Ticket Printed Succssfully !!!!" << endl;
                 }
             }
-            cout << "Thank you for booking with us !!!!" << endl
-                 << endl;
+            std::cout << "Thank you for booking with us !!!!" << std::endl
+                      << std::endl;
             if (!trainfound)
-                cout << "No Trains Found :)" << endl
-                     << endl;
+                std::cout << "No Trains Found :)" << std::endl
+                          << std::endl;
             ;
         }
-        else if(choice == 2)
+        else if (choice == 2)
         {
-            ofstream fout("ticket.txt");
+            std::ofstream fout("ticket.txt");
             fout.clear();
-            cout<<"Ticket Cancelled Successfully !!!!"<<endl<<endl;
+            std::cout << "Ticket Cancelled Successfully !!!!" << std::endl
+                      << std::endl;
         }
         else if (choice == 3)
         {
 
-            ofstream fout("password.txt");
-            string user, pass;
-            cout << "Enter new username : ";
-            cin >> user;
-            cout << "Enter new password : ";
-            cin >> pass;
+            std::ofstream fout("password.txt");
+            std::string user, pass;
+            std::cout << "Enter new username : ";
+            std::cin >> user;
+            std::cout << "Enter new password : ";
+            std::cin >> pass;
             fout << user << "\t" << pass;
             fout.close();
-            cout << endl
-                 << endl;
+            std::cout << std::endl
+                      << std::endl;
         }
         else if (choice == 4)
         {
-            cout << "Logged Off Successfully !!" << endl;
+            std::cout << "Logged Off Successfully !!" << std::endl;
             return 0;
+        }
+        else
+        {
+            system("cls");
+            board1();
         }
     }
     return 0;
