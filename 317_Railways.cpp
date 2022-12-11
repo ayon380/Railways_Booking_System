@@ -34,9 +34,9 @@ class passenger
 public:
     char sex;
     std::string name;
-    std::string bdate;
+    int age;
 };
-int isGoing(std::string s, std::string from, std::string to)
+int isGoing(std::string s, std::string from, std::string to)// checking stations
 {
     int q = 1;
     int pos = s.find("::");
@@ -214,7 +214,7 @@ void payment(int price)
 }
 int main()
 {
-    const int n = 8;
+    const int n = 10;
     // system("color 0");
     std::string a;
     while (1)
@@ -286,6 +286,10 @@ int main()
     train[1].a1 = 3;
     train[1].a2 = 6;
     train[1].a3 = 6;
+    train[1].slp = 200;
+    train[1].a1p = 400;
+    train[1].a2p = 600;
+    train[1].a3p = 900;
 
     train[2].no = 12839;
     train[2].name = "HWH-MAS MAIL EXP ::HWH,KGP,BBS,KUR,VZN,VSKP,BZA,GDR,MAS,";
@@ -298,6 +302,10 @@ int main()
     train[2].a1 = 4;
     train[2].a2 = 3;
     train[2].a3 = 2;
+    train[2].slp = 77;
+    train[2].a1p = 203;
+    train[2].a2p = 292;
+    train[2].a3p = 496;
 
     train[3].no = 12840;
     train[3].name = "MAS-HWH MAIL EXP ::MAS,GDR,BZA,VSKP,VZN,KUR,BBS,KGP,HWH,";
@@ -310,6 +318,10 @@ int main()
     train[3].a1 = 2;
     train[3].a3 = 4;
     train[3].a2 = 8;
+    train[3].slp = 77;
+    train[3].a1p = 203;
+    train[3].a2p = 292;
+    train[3].a3p = 496;
 
     train[4].no = 12863;
     train[4].name = "HWH SMVB EXP ::HWH,KGP,BBS,KUR,VZN,VSKP,BZA,RU,KPD,SMVT,";
@@ -322,6 +334,10 @@ int main()
     train[4].a1 = 6;
     train[4].a2 = 5;
     train[4].a3 = 2;
+    train[4].slp = 77;
+    train[4].a1p = 203;
+    train[4].a2p = 292;
+    train[4].a3p = 496;
 
     train[5].no = 12864;
     train[5].name = "SMVT-HWH EXP ::SMVT,KPD,RU,BZA,VSKP,VZN,KUR,BBS,KGP,HWH,";
@@ -334,6 +350,10 @@ int main()
     train[5].a1 = 8;
     train[5].a2 = 5;
     train[5].a3 = 6;
+    train[5].slp = 77;
+    train[5].a1p = 203;
+    train[5].a2p = 292;
+    train[5].a3p = 496;
 
     train[6].no = 12301;
     train[6].name = "RAJDHANI EXPRESS ::HWH,ASN,DHN,PNME,GAYA,DDU,PRYJ,CNB,NDLS,";
@@ -346,6 +366,10 @@ int main()
     train[6].a1 = 8;
     train[6].a2 = 5;
     train[6].a3 = 6;
+    train[6].slp = 77;
+    train[6].a1p = 308;
+    train[6].a2p = 420;
+    train[6].a3p = 673;
 
     train[7].no = 12302;
     train[7].name = "RAJDHANI EXPRESS ::NDLS,CNB,PRYJ,DDU,GAYA,PNME,DHN,ASN,HWH,";
@@ -358,6 +382,42 @@ int main()
     train[7].a1 = 8;
     train[7].a2 = 5;
     train[7].a3 = 6;
+    train[7].slp = 77;
+    train[7].a1p = 308;
+    train[7].a2p = 420;
+    train[7].a3p = 673;
+
+    train[8].no = 12259;
+    train[8].name = "BKN DURONTO EXPRESS ::HWH,DHN,DDU,PRYJ,CNB,NDLS,";
+    train[8].ttime = 18 * 60;
+    train[8].days = "1011001";
+    train[8].dtime = 17 * 60;
+    train[8].stops = 5;
+    train[8].arrtime = 11 * 60;
+    train[8].sl = 0;
+    train[8].a1 = 8;
+    train[8].a2 = 5;
+    train[8].a3 = 6;
+    train[8].slp = 77;
+    train[8].a1p = 2785 / 6;
+    train[8].a2p = 3805 / 6;
+    train[8].a3p = 4760 / 6;
+
+    train[9].no = 12260;
+    train[9].name = "HWH DURONTO EXPRESS ::NDLS,CNB,PRYJ,DDU,DHN,HWH,";
+    train[9].ttime = 17 * 60 + 30;
+    train[9].days = "1101100";
+    train[9].dtime = 19 * 60 + 45;
+    train[9].stops = 5;
+    train[9].arrtime = 13 * 60 + 15;
+    train[9].sl = 0;
+    train[9].a1 = 8;
+    train[9].a2 = 5;
+    train[9].a3 = 6;
+    train[9].slp = 77;
+    train[9].a1p = 2950 / 6;
+    train[9].a2p = 4080 / 6;
+    train[9].a3p = 5070 / 6;
     // train[6].o
     system("CLS");
     board1();
@@ -479,7 +539,7 @@ int main()
             for (int i = 0; i < n; i++)
             {
                 int r = isGoing(train[i].name, from, to);
-                if (r > 0 && train[i].no==trno)
+                if (r > 0 && train[i].no == trno)
                 {
                     count++;
                     std::string str = train[i].name;
@@ -540,9 +600,8 @@ int main()
                 q.name = s;
                 std::cout << "Enter Sex : ";
                 std::cin >> q.sex;
-                std::cout << "Enter Birth Date  DD/MM/YYYY : ";
-                std::getline(std::cin >> std::ws, s);
-                q.bdate = s;
+                std::cout << "Enter your Age : ";
+                std::cin>>q.age;
                 p.push_back(q);
             }
             std::cout << "Donee......" << std::endl
@@ -558,7 +617,7 @@ int main()
                 {
                     std::string coach;
                     int seat, capa;
-
+                    st += 1;
                     std::vector<int> seats;
                     for (int j = 0; j < pno; j++)
                     {
@@ -624,8 +683,7 @@ int main()
                     for (int j = 0; j < pno; j++)
                     {
                         std::cout.width(30);
-                        std::cout << std::left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  "
-                                  << "  " << coach << "-" << seats[j] << std::endl;
+                        std::cout << std::left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  "<<p[j].age<< "  " << coach << "-" << seats[j] << std::endl;
                     }
                     std::cout.width(30);
                     std::cout << std::left << "TOTAL AMOUNT : "
@@ -662,7 +720,7 @@ int main()
                         for (int j = 0; j < pno; j++)
                         {
                             fout.width(30);
-                            fout << std::left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  " << p[j].bdate << "  " << coach << "-" << seats[j] << std::endl
+                            fout << std::left << "PASSENGER NAME " << j + 1 << " : " << p[j].name << "  " << p[j].sex << "  " << p[j].age << "  " << coach << "-" << seats[j] << std::endl
                                  << std::endl;
                         }
                         fout.width(30);

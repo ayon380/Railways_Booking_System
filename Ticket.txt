@@ -3,15 +3,15 @@
 TRAIN No : 12245
 TRAIN NAME :                  HWH-SMVT DURONTO EXP 
 ORIGINATING STATION :         HWH
-DESTINATION STATION :         SMVT
+DESTINATION STATION :         BZA
 DEPARTURE TIME :              11:50
-ARRIVAL TIME :                16:50 Next Day
-CLASS :                       1A
-DATE :                        12/1/2003
-COACH NO - SEAT :             H1-17
-PASSENGER NAME                1 : Ayon Sarkar  M  12/02/2003  H1-17
+ARRIVAL TIME :                5:14 Next Day
+CLASS :                       3A
+DATE :                        4/1/2023
+COACH NO - SEAT :             B2-56
+PASSENGER NAME                1 : ayon  M  20  B2-56
 
-TOTAL AMOUNT :                INR 4500
+TOTAL AMOUNT :                INR 1600
 
 Wishing You a Happy and Safe Journey....
 
